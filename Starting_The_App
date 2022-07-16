@@ -1,0 +1,4 @@
+Go to the Directory containing the Files
+Use command npm install on command prompt at the given directory
+Ignore all Warnings
+Then Execute npm run dev
