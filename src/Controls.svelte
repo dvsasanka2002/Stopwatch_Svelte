@@ -1,0 +1,64 @@
+<script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+
+    function start() {
+        dispatch("start");
+    }
+    function stop() {
+        dispatch("stop");
+    }
+    function pause() {
+        dispatch("pause");
+    }
+    function lap() {
+        dispatch("lap");
+    }
+
+    export let subscription;
+    export let lapsed;
+</script>
+<style>
+    div {
+        display: flex;
+        border: 1px solid hsl(0, 0%, 25%);
+        border-radius: 20px;
+    }
+    div button {
+        font-size: 0.9rem;
+        color: hsl(0, 0%, 10%);
+        font-family: inherit;
+        padding: 0.5rem;
+        flex-grow: 1;
+        width: 0;
+        border: none;
+        background: none;
+        border-radius: inherit;
+        margin: 0; 
+        transition: background 0.2s ease-out;
+    }
+    div button:not(:first-of-type) {
+        border-left: 1px solid hsl(0, 0%, 25%);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    div button:focus {
+        outline-color: hsl(0, 95%, 51%);
+    }
+    div button:hover {
+        background: hsl(140, 96%, 49%);
+    }
+</style>
+
+<div class="controls">
+    {#if subscription}
+    <button on:click="{lap}">Lap</button>
+    <button on:click="{pause}">Pause</button>
+    {:else if lapsed}
+    <button on:click="{stop}">Reset</button>
+    <button on:click="{start}">Continue</button>
+    {:else}
+    <button on:click="{start}">Start</button>
+    {/if}
+</div>
